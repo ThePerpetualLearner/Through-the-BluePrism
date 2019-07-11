@@ -1,0 +1,73 @@
+﻿<process name="Notepad exercises2" version="1.0" bpversion="5.0.32.0" narrative="2.0&#xD;&#xA;" preferredid="9ad36f40-e036-439a-a7b7-90e754b01760">
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="0facc906-d7fe-455c-825a-24c2810985f2" name="Start" type="Start">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>bd9baacf-d2c2-4aad-b82e-4706f22dc6ee</onsuccess>
+  </stage>
+  <stage stageid="add637b8-88c6-4647-9d05-53b54eea587b" name="End" type="End">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="8c032aa2-f879-4f35-b27d-5da3369a82c6" name="Stage1" type="ProcessInfo">
+    <narrative>
+    </narrative>
+    <displayx>-195</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="bd9baacf-d2c2-4aad-b82e-4706f22dc6ee" name="Action1" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>0da3c90f-2eb8-416c-af8d-13d4a0047b7e</onsuccess>
+    <resource object="Notepad" action="Attach" />
+  </stage>
+  <stage stageid="19493b47-1efb-49d6-9068-782135e148b2" name="Action2" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>add637b8-88c6-4647-9d05-53b54eea587b</onsuccess>
+    <resource object="Notepad" action="Close Notepad" />
+  </stage>
+  <stage stageid="0da3c90f-2eb8-416c-af8d-13d4a0047b7e" name="Action3" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>0</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Input" expr="&quot;Hello World&quot;" />
+    </inputs>
+    <onsuccess>19493b47-1efb-49d6-9068-782135e148b2</onsuccess>
+    <resource object="Notepad" action="WriteToNotepad" />
+  </stage>
+</process>

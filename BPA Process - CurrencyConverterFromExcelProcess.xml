@@ -1,0 +1,519 @@
+﻿<process name="CurrencyConverterFromExcelProcess" version="1.0" bpversion="5.0.32.0" narrative="" preferredid="3f99d342-62f6-440f-9dba-6aa0fff423c3">
+  <view>
+    <camerax>-360</camerax>
+    <cameray>-105</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <subsheet subsheetid="3be7460d-482f-4689-be65-74c0549a249a" type="Normal" published="False">
+    <name>Write To Excel</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>0</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="bcbf5518-5c75-4772-ad16-d63f302b55a7" type="Normal" published="False">
+    <name>Convert Currency</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>21</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="6becc1ad-3d4b-495e-98c1-c227eb7de1da" type="Normal" published="False">
+    <name>Read From Excel</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>42</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <stage stageid="c1fa0974-3e30-4d68-8e3c-5287098288bd" name="Start" type="Start">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>-210</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>8a529457-a7dc-4fb8-accb-caeea0f592af</onsuccess>
+  </stage>
+  <stage stageid="b8b283cd-9792-42d3-bb0c-35cd6ce4cfe5" name="End" type="End">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>390</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="e28ab36c-3661-4e2d-a69d-943a3a8905b0" name="Stage1" type="ProcessInfo">
+    <narrative>
+    </narrative>
+    <displayx>-525</displayx>
+    <displayy>-195</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="3cdcca17-134c-4c01-a04c-c5b08566b9e5" name="Convert Currency" type="SubSheetInfo">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-195</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="9d3167b6-62d5-4fc2-b407-453bf425d6ec" name="Start" type="Start">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>-150</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Quantity" stage="Quantity" />
+      <input type="text" name="From Currency" stage="From Currency" />
+      <input type="text" name="To Currency" stage="To Currency" />
+    </inputs>
+    <onsuccess>16f430f7-4afb-407a-b3d3-fe0a47fc64ce</onsuccess>
+  </stage>
+  <stage stageid="08a9efa2-c058-4663-81d2-ccda1dcd12ca" name="End" type="End">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>285</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <outputs>
+      <output type="number" name="Rounded Value" stage="Rounded Number" />
+    </outputs>
+  </stage>
+  <stage stageid="16f430f7-4afb-407a-b3d3-fe0a47fc64ce" name="Set from Currency" type="Action">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>0</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="From Currency Value" expr="[From Currency]" />
+    </inputs>
+    <onsuccess>306330e9-883e-48e0-b72c-ec6b3cd600e2</onsuccess>
+    <resource object="CurrencyConverterVBO" action="Enter From Currency" />
+  </stage>
+  <stage stageid="306330e9-883e-48e0-b72c-ec6b3cd600e2" name="Enter TO Currency" type="Action">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>60</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="To CurrencyValue" expr="[To Currency]" />
+    </inputs>
+    <onsuccess>c64907d1-cbe7-4c61-9ce6-1c575aa45615</onsuccess>
+    <resource object="CurrencyConverterVBO" action="Enter To Currency" />
+  </stage>
+  <stage stageid="c64907d1-cbe7-4c61-9ce6-1c575aa45615" name="Enter Quanitity" type="Action">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>120</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Quantity Value" expr="[Quantity]" />
+    </inputs>
+    <onsuccess>40db3610-92b3-467d-98aa-8e649be410be</onsuccess>
+    <resource object="CurrencyConverterVBO" action="Enter Quantity" />
+  </stage>
+  <stage stageid="40db3610-92b3-467d-98aa-8e649be410be" name="Click Go" type="Action">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>dd9c5f10-0bb0-45cb-9ccc-7abaaf16761c</onsuccess>
+    <resource object="CurrencyConverterVBO" action="Click Go" />
+  </stage>
+  <stage stageid="dd9c5f10-0bb0-45cb-9ccc-7abaaf16761c" name="Read Value" type="Action">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>225</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <outputs>
+      <output type="number" name="RoundedInteger" stage="Rounded Number" />
+    </outputs>
+    <onsuccess>08a9efa2-c058-4663-81d2-ccda1dcd12ca</onsuccess>
+    <resource object="CurrencyConverterVBO" action="Read Converted Value" />
+  </stage>
+  <stage stageid="83439802-3b11-4cd3-9095-62924521a14e" name="From Currency" type="Data">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>405</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="ff30b4f8-7764-4df7-93e3-a09b68c786b2" name="To Currency" type="Data">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>390</displayx>
+    <displayy>-30</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="28f6a3c3-d9ab-49e9-8d6a-4d341acb0edf" name="Rounded Number" type="Data">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>390</displayx>
+    <displayy>30</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="71ccc479-61b3-4376-ab1b-6a3c5b46eb2a" name="Quantity" type="Data">
+    <subsheetid>bcbf5518-5c75-4772-ad16-d63f302b55a7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>375</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="94ed4a28-5d10-4c13-95d2-dd8e76ed4565" name="Read From Excel" type="SubSheetInfo">
+    <subsheetid>6becc1ad-3d4b-495e-98c1-c227eb7de1da</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-195</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="0966da5c-14b2-4666-ab0f-7454ee98bfa1" name="Start" type="Start">
+    <subsheetid>6becc1ad-3d4b-495e-98c1-c227eb7de1da</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>a06eb4a4-b7a0-44bc-9f5f-595952b30911</onsuccess>
+  </stage>
+  <stage stageid="7f33eeae-e66e-4eb5-a0dc-b5f7c719b8c8" name="End" type="End">
+    <subsheetid>6becc1ad-3d4b-495e-98c1-c227eb7de1da</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>210</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <outputs>
+      <output type="collection" name="Currency Collection" stage="Currency" />
+    </outputs>
+  </stage>
+  <stage stageid="a06eb4a4-b7a0-44bc-9f5f-595952b30911" name="Create Instance" type="Action">
+    <subsheetid>6becc1ad-3d4b-495e-98c1-c227eb7de1da</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="flag" name="Enable Events" narrative="Flag to indicate that events should be enabled / disabled on the attached instance - defaulted to True" expr="" />
+    </inputs>
+    <outputs>
+      <output type="number" name="handle" narrative="An integer which can be used to identify the created instance in subsequent actions" stage="handle" />
+    </outputs>
+    <onsuccess>f0cf9612-ab08-42b9-b086-fd2335beb04d</onsuccess>
+    <resource object="MS Excel VBO" action="Create Instance" />
+  </stage>
+  <stage stageid="34f58191-0c52-4e4c-bcfd-be71623fc91e" name="handle" type="Data">
+    <subsheetid>6becc1ad-3d4b-495e-98c1-c227eb7de1da</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>225</displayx>
+    <displayy>-90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <alwaysinit />
+  </stage>
+  <stage stageid="f0cf9612-ab08-42b9-b086-fd2335beb04d" name="Open Workbook" type="Action">
+    <subsheetid>6becc1ad-3d4b-495e-98c1-c227eb7de1da</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>0</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the required workbook should be opened. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="File name" narrative="The path and name of the file which should be opened." expr="&quot;F:\Selenium\RPA\Training\HandsOn\Day 7 - Web with Excel and Exception\Currency.xlsx&quot;" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Workbook Name" narrative="The name used by Excel to identify the workbook - usually this is the file name (without the path)." stage="Workbook Name" />
+    </outputs>
+    <onsuccess>a5cf4543-6643-4782-af5f-9c90803b117d</onsuccess>
+    <resource object="MS Excel VBO" action="Open Workbook" />
+  </stage>
+  <stage stageid="0cf0d544-424d-426d-80c3-a526657c0073" name="Workbook Name" type="Data">
+    <subsheetid>6becc1ad-3d4b-495e-98c1-c227eb7de1da</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>240</displayx>
+    <displayy>0</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <alwaysinit />
+  </stage>
+  <stage stageid="a5cf4543-6643-4782-af5f-9c90803b117d" name="Store in collection" type="Action">
+    <subsheetid>6becc1ad-3d4b-495e-98c1-c227eb7de1da</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>75</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the worksheet which should be retrieved resides. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" narrative="The name of the workbook which contains the sheet required. The default empty text indicates the currently active workbook on the specified instance." expr="[Workbook Name]" />
+      <input type="text" name="Worksheet Name" narrative="The name of the worksheet within the specified workbook which should be written to a collection. The default empty text indicates the currently active worksheet within the specified workbook." expr="&quot;Sheet1&quot;" />
+    </inputs>
+    <outputs>
+      <output type="collection" name="Data" narrative="The collection containing the data from the specified worksheet - the column IDs will be gleaned from the first row on the sheet being retrieved." stage="Currency" />
+    </outputs>
+    <onsuccess>7f33eeae-e66e-4eb5-a0dc-b5f7c719b8c8</onsuccess>
+    <resource object="MS Excel VBO" action="Get Worksheet As Collection" />
+  </stage>
+  <stage stageid="7255462b-9b25-49b9-9c24-bc1abb931191" name="Currency" type="Collection">
+    <subsheetid>6becc1ad-3d4b-495e-98c1-c227eb7de1da</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>240</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <alwaysinit />
+  </stage>
+  <stage stageid="8a529457-a7dc-4fb8-accb-caeea0f592af" name="Read From Excel" type="SubSheet">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>-120</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <outputs>
+      <output type="collection" name="Currency Collection" stage="Currency Collection" />
+    </outputs>
+    <onsuccess>907b394d-fdd7-4c14-9be4-8f235472cff8</onsuccess>
+    <processid>6becc1ad-3d4b-495e-98c1-c227eb7de1da</processid>
+  </stage>
+  <stage stageid="e653d5a1-1e58-4bd6-b651-ae971af97028" name="Currency Collection" type="Collection">
+    <narrative>
+    </narrative>
+    <displayx>165</displayx>
+    <displayy>-45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="2634cadc-ca00-4c80-90df-f9fcd424900d" name="Loop Start1" type="LoopStart">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>0</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>b4620d93-26be-416a-90a0-6ffe337a5979</onsuccess>
+    <groupid>dcb03a1c-45d9-4726-91a8-470a30a6fd32</groupid>
+    <looptype>ForEach</looptype>
+    <loopdata>Currency Collection</loopdata>
+  </stage>
+  <stage stageid="3bc2e572-d5d6-4f28-9301-62bbbf2c1d5f" name="Loop End1" type="LoopEnd">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>120</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>d93b4ad4-2695-4a44-86a0-f6287a2870cf</onsuccess>
+    <groupid>dcb03a1c-45d9-4726-91a8-470a30a6fd32</groupid>
+  </stage>
+  <stage stageid="b4620d93-26be-416a-90a0-6ffe337a5979" name="Convert Currency" type="SubSheet">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>60</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Quantity" expr="[Currency Collection.Quantity]" />
+      <input type="text" name="From Currency" expr="[Currency Collection.From Currency]" />
+      <input type="text" name="To Currency" expr="[Currency Collection.To Currency]" />
+    </inputs>
+    <outputs>
+      <output type="number" name="Rounded Value" stage="Currency Collection.Converted Value" />
+    </outputs>
+    <onsuccess>3bc2e572-d5d6-4f28-9301-62bbbf2c1d5f</onsuccess>
+    <processid>bcbf5518-5c75-4772-ad16-d63f302b55a7</processid>
+  </stage>
+  <stage stageid="907b394d-fdd7-4c14-9be4-8f235472cff8" name="Open Website" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>-60</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>2634cadc-ca00-4c80-90df-f9fcd424900d</onsuccess>
+    <resource object="CurrencyConverterVBO" action="Open" />
+  </stage>
+  <stage stageid="aea23f62-cf02-45a6-8e27-dedf44182bb4" name="Save Excel" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>285</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>49459ff0-6d5d-4717-a417-863ce5bbdbdf</onsuccess>
+    <resource object="MS Excel VBO" action="Save Current Workbook" />
+  </stage>
+  <stage stageid="49459ff0-6d5d-4717-a417-863ce5bbdbdf" name="Close Workbook" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>330</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>b8b283cd-9792-42d3-bb0c-35cd6ce4cfe5</onsuccess>
+    <resource object="MS Excel VBO" action="Close All Instances" />
+  </stage>
+  <stage stageid="d93b4ad4-2695-4a44-86a0-f6287a2870cf" name="Close Browser" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>180</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>9a3ffc32-a6f9-428b-a591-7747f464c9d1</onsuccess>
+    <resource object="CurrencyConverterVBO" action="Close" />
+  </stage>
+  <stage stageid="9a3ffc32-a6f9-428b-a591-7747f464c9d1" name="Write Collection" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>225</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the specified collection should be written. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="Workbook Name" narrative="The name of the workbook within which the data should be written. The default empty value indicates the current workbook within the specified instance." expr="[Workbook Name]" />
+      <input type="text" name="Worksheet Name" narrative="The name of the worksheet on which the given data should be written. The default empty value indicates the current sheet within the specified workbook." expr="&quot;Sheet1&quot;" />
+      <input type="collection" name="Collection" narrative="The collection containing the data which should be written to the worksheet." expr="[Currency]" />
+      <input type="text" name="Cell Reference" narrative="The reference at which the collection should be written." expr="&quot;A1&quot;" />
+      <input type="flag" name="Include Column Names" narrative="True to indicate that the column names from the collection should be written out as the first row; False to ignore the column names and just write out the data." expr="True" />
+    </inputs>
+    <onsuccess>aea23f62-cf02-45a6-8e27-dedf44182bb4</onsuccess>
+    <resource object="MS Excel VBO" action="Write Collection" />
+  </stage>
+  <stage stageid="47b96792-985f-4524-a5f9-ff8df42b383d" name="Write To Excel" type="SubSheetInfo">
+    <subsheetid>3be7460d-482f-4689-be65-74c0549a249a</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-195</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="1424eb52-46a7-4617-b4c3-7ae7386f5f27" name="Start" type="Start">
+    <subsheetid>3be7460d-482f-4689-be65-74c0549a249a</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="604f3007-e4d0-44a2-b59d-922c9c43d83a" name="End" type="End">
+    <subsheetid>3be7460d-482f-4689-be65-74c0549a249a</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+</process>
