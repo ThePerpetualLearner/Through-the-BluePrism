@@ -1,0 +1,447 @@
+﻿<process name="udemy3" version="1.0" bpversion="5.0.11.0" narrative="" preferredid="c14b4a87-a8a4-455e-82b2-4a709ab6a26e">
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <subsheet subsheetid="8804c804-bb77-4a8e-b568-72cfa7b4646e" type="Normal" published="False">
+    <name>Add to Queue</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>0</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <stage stageid="77f3c6e2-2490-408c-bc8b-c35dba21fae2" name="Start" type="Start">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>76071e36-ecd2-4f61-928f-d82a58f335fe</onsuccess>
+  </stage>
+  <stage stageid="016086d2-ad60-4049-babe-c71a39e66529" name="End" type="End">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <outputs>
+      <output type="collection" name="Emp data" stage="Employee data" />
+    </outputs>
+  </stage>
+  <stage stageid="15d72f7d-03d9-44fe-9abe-c7bd3d559c9b" name="Stage1" type="ProcessInfo">
+    <narrative>
+    </narrative>
+    <displayx>-195</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="577faf23-1f12-4f8a-85a6-a11ad7c6babc" name="Employee data" type="Collection">
+    <narrative>
+    </narrative>
+    <displayx>-210</displayx>
+    <displayy>-30</displayy>
+    <displaywidth>90</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="98df1cc7-68eb-4a21-b13c-f7fcf640d32c" name="Item IDs" type="Collection">
+    <narrative>
+    </narrative>
+    <displayx>-210</displayx>
+    <displayy>15</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+    <collectioninfo>
+      <field name="Item ID" type="text" description="The Item ID of the work queue item" />
+    </collectioninfo>
+  </stage>
+  <stage stageid="c1e3b1d3-1c36-46c8-bdd1-dae8f6968dcd" name="Get collection" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-30</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <outputs>
+      <output type="collection" name="Data" narrative="The data output" stage="Employee data" />
+    </outputs>
+    <onsuccess>df0db328-2a75-4d0d-875a-d528eb9f4959</onsuccess>
+    <resource object="MS Excel VBO" action="Get Worksheet As Collection (Fast)" />
+  </stage>
+  <stage stageid="76071e36-ecd2-4f61-928f-d82a58f335fe" name="Create instance" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-120</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="flag" name="Enable Events" narrative="Flag to indicate that events should be enabled / disabled on the attached instance - defaulted to True" expr="" />
+    </inputs>
+    <outputs>
+      <output type="number" name="handle" narrative="An integer which can be used to identify the created instance in subsequent actions" stage="handle" />
+    </outputs>
+    <onsuccess>6dea43b9-9403-4b61-96aa-8ce52b34a8fc</onsuccess>
+    <resource object="MS Excel VBO" action="Create Instance" />
+  </stage>
+  <stage stageid="8b828a5b-8ccf-400d-80a7-556b7a4ddecb" name="handle" type="Data">
+    <narrative>
+    </narrative>
+    <displayx>-135</displayx>
+    <displayy>-15</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="6dea43b9-9403-4b61-96aa-8ce52b34a8fc" name="Open workbook" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-75</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the required workbook should be opened. The default of zero indicates the currently active instance." expr="[handle]" />
+      <input type="text" name="File name" narrative="The path and name of the file which should be opened." expr="&quot;C:\Users\ACT\Desktop\udemy3.xlsx&quot;" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Workbook Name" narrative="The name used by Excel to identify the workbook - usually this is the file name (without the path)." stage="Workbook Name" />
+    </outputs>
+    <onsuccess>c1e3b1d3-1c36-46c8-bdd1-dae8f6968dcd</onsuccess>
+    <resource object="MS Excel VBO" action="Open Workbook" />
+  </stage>
+  <stage stageid="6105b423-9f40-4825-913c-588c1ef0f6c0" name="Workbook Name" type="Data">
+    <narrative>
+    </narrative>
+    <displayx>-135</displayx>
+    <displayy>30</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="8e40fd8e-6a33-48bc-93b3-03b7b583be27" name="Add to Queue" type="SubSheetInfo">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-195</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="aee7094a-91f5-4388-8cbf-f712e3ad5cf3" name="Start" type="Start">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="collection" name="Emp data" stage="Emp data" />
+    </inputs>
+    <onsuccess>6f5aaddc-34cb-4bce-9403-08fc199ad0df</onsuccess>
+  </stage>
+  <stage stageid="18e4b52e-a659-4008-a52b-ec890c5f1d32" name="End" type="End">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>105</displayx>
+    <displayy>-15</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="6f5aaddc-34cb-4bce-9403-08fc199ad0df" name="Add to Q" type="Action">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-120</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Queue Name" narrative="The name of the queue to add items to" expr="&quot;Queue1&quot;" />
+      <input type="collection" name="Data" narrative="A collection containing the data, one row for each item to be added" expr="[Emp data]" />
+      <input type="datetime" name="Defer Until" narrative="Optionally, the date/time the new item(s) should be deferred until" expr="" />
+      <input type="number" name="Priority" narrative="Optionally, the priority for the new item(s). Lower numbers represent higher priorities. The default is 0." expr="" />
+      <input type="text" name="Tags" narrative="Optionally, a semi-colon-separated set of tags to apply to the queue item(s)" expr="" />
+      <input type="text" name="Status" narrative="Optionally, the initial status required of the work queue item(s) " expr="" />
+    </inputs>
+    <outputs>
+      <output type="collection" name="Item IDs" narrative="The IDs of the items which have been added to the queue, in the order of the collection of data passed that was input" stage="Item IDs" />
+    </outputs>
+    <onsuccess>699994de-833a-47d0-a488-15f1044761e1</onsuccess>
+    <resource object="Blueprism.Automate.clsWorkQueuesActions" action="Add To Queue" />
+  </stage>
+  <stage stageid="699994de-833a-47d0-a488-15f1044761e1" name="Get next item" type="Action">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-75</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Queue Name" narrative="The name of the queue to add items to" expr="&quot;Queue1&quot;" />
+      <input type="text" name="Key Filter" narrative="Optionally, a key value to filter by. Only items with this key value will be considered." expr="" />
+      <input type="text" name="Tag Filter" narrative="Optionally, a tag mask to filter by. This can consist of any number of tag searches - each term can be separated by a semi-colon and they are all applied to the search (ie. they are AND'ed terms not OR'ed terms). For example, &quot;Account: Joint; -Balance: Overdrawn; Card: *Visa*&quot; will include any items which match all the terms, ie. every item must have an 'Account: Joint' tag applied, no item can have a 'Balance: Overdrawn' tag applied, every item must have a tag applied which starts with 'Card: ' and then contains the text 'Visa'." expr="" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Item ID" narrative="The ID of the item retrieved - empty if there are none available." stage="Item ID" />
+      <output type="collection" name="Data" narrative="The data associated with the item - a single collection row." stage="Next item" />
+      <output type="text" name="Status" narrative="The status of the item." stage="" />
+      <output type="number" name="Attempts" narrative="The number of attempts already made to work this item." stage="" />
+    </outputs>
+    <onsuccess>2bc4ed54-ab06-48cb-82b1-b2f31835a46d</onsuccess>
+    <resource object="Blueprism.Automate.clsWorkQueuesActions" action="Get Next Item" />
+  </stage>
+  <stage stageid="2bc4ed54-ab06-48cb-82b1-b2f31835a46d" name="Got item?" type="Decision">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-15</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <decision expression="[Item ID]&lt;&gt;&quot;&quot;" />
+    <ontrue>1178a661-9c97-43c2-8000-85029213f5f3</ontrue>
+    <onfalse>18e4b52e-a659-4008-a52b-ec890c5f1d32</onfalse>
+  </stage>
+  <stage stageid="21d082f2-4096-4d91-9dd1-f043a1c3ac39" name="Mark Complete" type="Action">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>180</displayx>
+    <displayy>150</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Item ID" narrative="The ID of the item to mark" expr="[Item ID]" />
+    </inputs>
+    <onsuccess>6be055b5-eb07-4c23-81d4-6b6aadcff8ef</onsuccess>
+    <resource object="Blueprism.Automate.clsWorkQueuesActions" action="Mark Completed" />
+  </stage>
+  <stage stageid="8b5a337a-eff5-4f55-aa0d-f18a07b4af27" name="Emp data" type="Collection">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-210</displayx>
+    <displayy>-15</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="cfd58d4f-9613-460b-9db8-005b9ed2a76d" name="Item IDs" type="Collection">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-150</displayx>
+    <displayy>-15</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="747f3f41-baeb-450d-8d2b-659aeb0ad3aa" name="Item ID" type="Data">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-150</displayx>
+    <displayy>30</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="4d462970-6c5e-46b2-b97e-348fa06c9523" name="Next item" type="Collection">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>30</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="1178a661-9c97-43c2-8000-85029213f5f3" name="Salary of Emp" type="Calculation">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>61fce4e9-9e3a-4bfb-a9e4-41b86faaa835</onsuccess>
+    <calculation expression="[Next item.Salary]" stage="salary" />
+  </stage>
+  <stage stageid="df0db328-2a75-4d0d-875a-d528eb9f4959" name="Add to Queue" type="SubSheet">
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>30</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="collection" name="Emp data" expr="[Employee data]" />
+    </inputs>
+    <onsuccess>016086d2-ad60-4049-babe-c71a39e66529</onsuccess>
+    <processid>8804c804-bb77-4a8e-b568-72cfa7b4646e</processid>
+  </stage>
+  <stage stageid="78f09fed-8661-4a93-81f9-d7dab55158ac" name="salary" type="Data">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>75</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="61fce4e9-9e3a-4bfb-a9e4-41b86faaa835" name="Salary more than 1.2 k?" type="Decision">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <decision expression="[salary]&gt;[threshhold salary]" />
+    <ontrue>38e7a744-0afd-4c0a-8f31-1cdb28b733d0</ontrue>
+    <onfalse>33fc253c-b29e-4d23-b204-6f815fcd9e5c</onfalse>
+  </stage>
+  <stage stageid="072189cb-0a75-4cb6-8ece-a8df14946ca9" name="threshhold salary" type="Data">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-165</displayx>
+    <displayy>75</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue>120000</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="38e7a744-0afd-4c0a-8f31-1cdb28b733d0" name="Salary correction" type="Calculation">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>150</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>21d082f2-4096-4d91-9dd1-f043a1c3ac39</onsuccess>
+    <calculation expression="[salary]-([salary]*0.05)" stage="Decreased salary" />
+  </stage>
+  <stage stageid="575adc76-7cbb-4407-b61a-c6c961f05ea7" name="Decreased salary" type="Data">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>120</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="33fc253c-b29e-4d23-b204-6f815fcd9e5c" name="Mark Exception" type="Action">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>105</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Item ID" narrative="The ID of the item to mark" expr="[Item ID]" />
+      <input type="text" name="Exception Reason" narrative="A description of the reason for the exception" expr="&quot;Salary below $,120,000&quot;" />
+      <input type="flag" name="Retry" narrative="Whether or not to retry the item, up to the maximum number of attempts specified for the queue. Optional - if not specified, the item will be retried" expr="" />
+      <input type="flag" name="Keep Locked" narrative="Whether or not the clone of the item should remain locked after the exception has been registered and the item is retried. Optional - default is False" expr="" />
+    </inputs>
+    <outputs>
+      <output type="text" name="New Item ID" narrative="The Item ID of the newly cloned item. This item will be locked if 'Keep Locked' is True. This will be empty if no item was cloned (ie. the item was not retried." stage="" />
+    </outputs>
+    <onsuccess>6be055b5-eb07-4c23-81d4-6b6aadcff8ef</onsuccess>
+    <resource object="Blueprism.Automate.clsWorkQueuesActions" action="Mark Exception" />
+  </stage>
+  <stage stageid="6be055b5-eb07-4c23-81d4-6b6aadcff8ef" name="Anchor1" type="Anchor">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>180</displayx>
+    <displayy>90</displayy>
+    <displaywidth>10</displaywidth>
+    <displayheight>10</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>7330109b-a466-4846-aec9-e52fc4d6dabc</onsuccess>
+  </stage>
+  <stage stageid="7330109b-a466-4846-aec9-e52fc4d6dabc" name="Anchor2" type="Anchor">
+    <subsheetid>8804c804-bb77-4a8e-b568-72cfa7b4646e</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>180</displayx>
+    <displayy>-75</displayy>
+    <displaywidth>10</displaywidth>
+    <displayheight>10</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>699994de-833a-47d0-a488-15f1044761e1</onsuccess>
+  </stage>
+</process>

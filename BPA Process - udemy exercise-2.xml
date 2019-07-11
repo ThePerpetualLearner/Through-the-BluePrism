@@ -1,0 +1,858 @@
+﻿<process name="udemy 2" version="1.0" bpversion="5.0.11.0" narrative="ex2" preferredid="e6c5ec4c-fc8f-4528-aac0-fd1fa5493c1a">
+  <view>
+    <camerax>-29</camerax>
+    <cameray>-24</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <subsheet subsheetid="f85ee371-feee-4dd0-b44c-ddcb340878f7" type="Normal" published="False">
+    <name>Get Values from Excel &amp; paste on another sheet</name>
+    <view>
+      <camerax>-53</camerax>
+      <cameray>-5</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <stage stageid="5d2dc732-40d2-47cb-bc59-31d46bb5cb94" name="Start" type="Start">
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>-180</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>7fd597d4-1be0-49dc-97f1-fd0755bb0194</onsuccess>
+  </stage>
+  <stage stageid="887f88d0-aaa5-4b83-889a-e3273e5db9c4" name="End" type="End">
+    <narrative>
+    </narrative>
+    <displayx>-15</displayx>
+    <displayy>150</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="7cc1e188-4524-4aea-9562-24962ab647a8" name="Stage1" type="ProcessInfo">
+    <narrative>
+    </narrative>
+    <displayx>-195</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="d561b01a-8dd3-415e-b60a-8104c4ad5c63" name="Get files from folder" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>120</displayx>
+    <displayy>-135</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Folder" narrative="The folder in which to look for files" expr="&quot;C:\Users\ACT\Desktop\Input Marks&quot;" />
+      <input type="text" name="Patterns CSV" narrative="The comma seperated list of wildcard patterns" expr="[Files.path]" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" narrative="True if successful" stage="" />
+      <output type="text" name="Message" narrative="A message if unsuccessful" stage="" />
+      <output type="collection" name="Files" narrative="The collection of files found" stage="Files" />
+    </outputs>
+    <resource object="Utility - File Management" action="Get Files" />
+  </stage>
+  <stage stageid="840bd8fc-3cb0-47f6-9a34-26464fd48700" name="Files" type="Collection">
+    <narrative>
+    </narrative>
+    <displayx>-195</displayx>
+    <displayy>-30</displayy>
+    <displaywidth>90</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="7fd597d4-1be0-49dc-97f1-fd0755bb0194" name="Output instance" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>-135</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="flag" name="Enable Events" narrative="Flag to indicate that events should be enabled / disabled on the attached instance - defaulted to True" expr="" />
+    </inputs>
+    <outputs>
+      <output type="number" name="handle" narrative="An integer which can be used to identify the created instance in subsequent actions" stage="Output excel handle" />
+    </outputs>
+    <onsuccess>5c60840b-8590-4bcb-877c-b3fcb06d598c</onsuccess>
+    <resource object="MS Excel VBO" action="Create Instance" />
+  </stage>
+  <stage stageid="ef5dd8f5-d0c4-4ea2-b1ea-8b82052dba43" name="Output excel handle" type="Data">
+    <narrative>
+    </narrative>
+    <displayx>-285</displayx>
+    <displayy>-15</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="5c60840b-8590-4bcb-877c-b3fcb06d598c" name="Open workbook" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>-90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the required workbook should be opened. The default of zero indicates the currently active instance." expr="[Output excel handle]" />
+      <input type="text" name="File name" narrative="The path and name of the file which should be opened." expr="&quot;C:\Users\ACT\Desktop\Output Marks Obtained.xlsx&quot;" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Workbook Name" narrative="The name used by Excel to identify the workbook - usually this is the file name (without the path)." stage="Output Workbook Name" />
+    </outputs>
+    <onsuccess>14cf7dbe-fecc-4126-9a0c-e6523e883d6b</onsuccess>
+    <resource object="MS Excel VBO" action="Open Workbook" />
+  </stage>
+  <stage stageid="9700162a-254d-467a-adf9-42302bf45cdc" name="Output Workbook Name" type="Data">
+    <narrative>
+    </narrative>
+    <displayx>-120</displayx>
+    <displayy>-15</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="14cf7dbe-fecc-4126-9a0c-e6523e883d6b" name="Show" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>-45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance which should have its window displayed. The default of zero indicates the currently active instance." expr="[Output excel handle]" />
+    </inputs>
+    <onsuccess>52c3d266-1a74-46e1-81df-645e91cba727</onsuccess>
+    <resource object="MS Excel VBO" action="Show" />
+  </stage>
+  <stage stageid="52c3d266-1a74-46e1-81df-645e91cba727" name="Input Instance" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>0</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="flag" name="Enable Events" narrative="Flag to indicate that events should be enabled / disabled on the attached instance - defaulted to True" expr="" />
+    </inputs>
+    <outputs>
+      <output type="number" name="handle" narrative="An integer which can be used to identify the created instance in subsequent actions" stage="Input instance handle" />
+    </outputs>
+    <onsuccess>c6859ad4-ed9e-4313-a2b1-efbb98e16622</onsuccess>
+    <resource object="MS Excel VBO" action="Create Instance" />
+  </stage>
+  <stage stageid="d3001ede-94bf-4f48-b9d9-fbd8001c3387" name="Input instance handle" type="Data">
+    <narrative>
+    </narrative>
+    <displayx>-285</displayx>
+    <displayy>30</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="c6859ad4-ed9e-4313-a2b1-efbb98e16622" name="Open input workbook" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the required workbook should be opened. The default of zero indicates the currently active instance." expr="[Input instance handle]" />
+      <input type="text" name="File name" narrative="The path and name of the file which should be opened." expr="&quot;C:\Users\ACT\Desktop\Marks obtained.xlsx&quot;" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Workbook Name" narrative="The name used by Excel to identify the workbook - usually this is the file name (without the path)." stage="Input workbook Name" />
+    </outputs>
+    <onsuccess>a7c65939-9e17-43d3-bae0-a594df45ecdf</onsuccess>
+    <resource object="MS Excel VBO" action="Open Workbook" />
+  </stage>
+  <stage stageid="348a346e-b750-4001-bb18-8e9154a29351" name="Input workbook Name" type="Data">
+    <narrative>
+    </narrative>
+    <displayx>-135</displayx>
+    <displayy>30</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="78989e3a-a2b3-44f3-8af0-a6678a7978c6" name="Copy name" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>75</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance from which the required cell value should be retrieved. The default of zero indicates the currently active instance." expr="[Input instance handle]" />
+      <input type="text" name="Cell Reference" narrative="The cell reference indicating which cell's value should be retrieved. An empty value indicates that the currently active cell's value should be retrieved." expr="" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Value" narrative="The (unformatted) value from the required cell." stage="Name" />
+    </outputs>
+    <onsuccess>01a90e1e-1470-4ee4-85cf-f3551e6f673e</onsuccess>
+    <resource object="MS Excel VBO" action="Get Cell Value" />
+  </stage>
+  <stage stageid="d50c0822-83dc-4119-9824-56d0c8a486e8" name="Name" type="Data">
+    <narrative>
+    </narrative>
+    <displayx>-285</displayx>
+    <displayy>75</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="4b4c3d4f-2418-429b-9981-273b5f1d0235" name="Marks" type="Data">
+    <narrative>
+    </narrative>
+    <displayx>-150</displayx>
+    <displayy>75</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="01a90e1e-1470-4ee4-85cf-f3551e6f673e" name="Copy marks" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>165</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance from which the required cell value should be retrieved. The default of zero indicates the currently active instance." expr="[Input instance handle]" />
+      <input type="text" name="Cell Reference" narrative="The cell reference indicating which cell's value should be retrieved. An empty value indicates that the currently active cell's value should be retrieved." expr="" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Value" narrative="The (unformatted) value from the required cell." stage="Marks" />
+    </outputs>
+    <onsuccess>b1f9ab3b-efea-45b0-af6d-98bc08b78ce2</onsuccess>
+    <resource object="MS Excel VBO" action="Get Cell Value" />
+  </stage>
+  <stage stageid="032de174-5059-422d-ab30-eddb61db37f4" name="Counter" type="Data">
+    <narrative>
+    </narrative>
+    <displayx>-225</displayx>
+    <displayy>120</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue>0</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="b1f9ab3b-efea-45b0-af6d-98bc08b78ce2" name="Paste name in output" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>240</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the required cell value should be set. The default of zero indicates the currently active instance." expr="[Output excel handle]" />
+      <input type="text" name="Cell Reference" narrative="The reference on the speficied sheet identifying the cell which should be set." expr="&quot;A&quot;&amp;[Counter]" />
+      <input type="text" name="Value" narrative="The value to which the specified cell should be set." expr="[Name]" />
+    </inputs>
+    <onsuccess>78d337fe-72c2-4762-98a7-2b709dbae350</onsuccess>
+    <resource object="MS Excel VBO" action="Set Cell Value" />
+  </stage>
+  <stage stageid="78d337fe-72c2-4762-98a7-2b709dbae350" name="Paste marks in output" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>315</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the required cell value should be set. The default of zero indicates the currently active instance." expr="[Output excel handle]" />
+      <input type="text" name="Cell Reference" narrative="The reference on the speficied sheet identifying the cell which should be set." expr="&quot;C&quot;&amp;[Counter]" />
+      <input type="text" name="Value" narrative="The value to which the specified cell should be set." expr="[Marks]" />
+    </inputs>
+    <onsuccess>773731f3-49b4-435e-ab7a-802f777b14cb</onsuccess>
+    <resource object="MS Excel VBO" action="Set Cell Value" />
+  </stage>
+  <stage stageid="773731f3-49b4-435e-ab7a-802f777b14cb" name="Close Input instance" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>315</displayx>
+    <displayy>150</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance to be closed. Zero indicates the currently active instance." expr="[Input instance handle]" />
+      <input type="flag" name="Save Changes" narrative="True to save the changes to the open workbooks on the instance, False to discard any changes. Default is False." expr="" />
+    </inputs>
+    <onsuccess>474d3a1c-332d-430a-b621-1eb10f9f91a0</onsuccess>
+    <resource object="MS Excel VBO" action="Close Instance" />
+  </stage>
+  <stage stageid="474d3a1c-332d-430a-b621-1eb10f9f91a0" name="Increment Counter" type="Calculation">
+    <narrative>
+    </narrative>
+    <displayx>210</displayx>
+    <displayy>150</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>7b66141f-06d2-45eb-939d-13c9256b16e3</onsuccess>
+    <calculation expression="[Counter]+1" stage="Counter" />
+  </stage>
+  <stage stageid="1eee8be5-2306-4c5f-b2b6-d9f802bab07e" name="Close Output Instance" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>60</displayx>
+    <displayy>150</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance to be closed. Zero indicates the currently active instance." expr="[Output excel handle]" />
+      <input type="flag" name="Save Changes" narrative="True to save the changes to the open workbooks on the instance, False to discard any changes. Default is False." expr="" />
+    </inputs>
+    <onsuccess>887f88d0-aaa5-4b83-889a-e3273e5db9c4</onsuccess>
+    <resource object="MS Excel VBO" action="Close Instance" />
+  </stage>
+  <stage stageid="802b94d5-3c34-4c62-ae50-c0f7f23bf879" name="Loop Start1" type="LoopStart">
+    <narrative>
+    </narrative>
+    <displayx>0</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>78989e3a-a2b3-44f3-8af0-a6678a7978c6</onsuccess>
+    <groupid>6f3809ea-d7cf-486c-ad34-057ad754f381</groupid>
+    <looptype>ForEach</looptype>
+    <loopdata>Files</loopdata>
+  </stage>
+  <stage stageid="7b66141f-06d2-45eb-939d-13c9256b16e3" name="Loop End1" type="LoopEnd">
+    <narrative>
+    </narrative>
+    <displayx>135</displayx>
+    <displayy>150</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>1eee8be5-2306-4c5f-b2b6-d9f802bab07e</onsuccess>
+    <groupid>6f3809ea-d7cf-486c-ad34-057ad754f381</groupid>
+  </stage>
+  <stage stageid="a7c65939-9e17-43d3-bae0-a594df45ecdf" name="Get Collection" type="Action">
+    <narrative>
+    </narrative>
+    <displayx>90</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <outputs>
+      <output type="collection" name="Data" narrative="The data output" stage="Files" />
+    </outputs>
+    <onsuccess>802b94d5-3c34-4c62-ae50-c0f7f23bf879</onsuccess>
+    <resource object="MS Excel VBO" action="Get Worksheet As Collection (Fast)" />
+  </stage>
+  <stage stageid="6edaf4d7-f3d8-489e-8caf-e3f0b8159d45" name="work-around" type="Note">
+    <narrative>access dir
+open output file
+start loop
+access 1st file&gt;go to worksheet&gt;read cell value&gt;store it
+go to output file&gt;write values
+close input workbook
+end loop
+close output file</narrative>
+    <displayx>-420</displayx>
+    <displayy>-120</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>240</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="ee09bd98-5984-495c-9f35-ce62ceb2cbc8" name="Get Values from Excel &amp; paste on another sheet" type="SubSheetInfo">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-435</displayx>
+    <displayy>-180</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="9f2487b9-0a24-4ce2-a094-ebecbec1979e" name="Start" type="Start">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>45</displayx>
+    <displayy>-180</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>a1a08862-315f-4434-9f6f-1982a063c883</onsuccess>
+  </stage>
+  <stage stageid="58eea22a-5e75-4ad3-99e8-63d3a3d72c37" name="End" type="End">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>135</displayx>
+    <displayy>165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="7ad90d8f-a597-476c-9221-0974ce924cbc" name="work-around" type="Note">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>access dir
+open output file
+start loop
+access 1st file&gt;go to worksheet&gt;read cell value&gt;store it
+go to output file&gt;write values
+close input workbook
+end loop
+close output file</narrative>
+    <displayx>-435</displayx>
+    <displayy>-15</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>240</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="a1a08862-315f-4434-9f6f-1982a063c883" name="Get files from folder" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-45</displayx>
+    <displayy>-180</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Folder" narrative="The folder in which to look for files" expr="&quot;C:\Users\ACT\Desktop\Input marks&quot;" />
+      <input type="text" name="Patterns CSV" narrative="The comma seperated list of wildcard patterns" expr="&quot;*.xlsx&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" narrative="True if successful" stage="" />
+      <output type="text" name="Message" narrative="A message if unsuccessful" stage="" />
+      <output type="collection" name="Files" narrative="The collection of files found" stage="Files" />
+    </outputs>
+    <onsuccess>f5a4075a-6b47-44f9-887a-b4dfa2d07467</onsuccess>
+    <resource object="Utility - File Management" action="Get Files" />
+  </stage>
+  <stage stageid="de928ba1-77aa-42e3-ad43-b240a02b88eb" name="Files" type="Collection">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-180</displayx>
+    <displayy>-165</displayy>
+    <displaywidth>120</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="f5a4075a-6b47-44f9-887a-b4dfa2d07467" name="Output file instance" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-45</displayx>
+    <displayy>-135</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="flag" name="Enable Events" narrative="Flag to indicate that events should be enabled / disabled on the attached instance - defaulted to True" expr="" />
+    </inputs>
+    <outputs>
+      <output type="number" name="handle" narrative="An integer which can be used to identify the created instance in subsequent actions" stage="Output file handle" />
+    </outputs>
+    <onsuccess>823a2df0-aca4-4ade-8089-aa09f91bdf78</onsuccess>
+    <resource object="MS Excel VBO" action="Create Instance" />
+  </stage>
+  <stage stageid="17d4713b-120e-48f1-bfd0-22b647ea0050" name="Output file handle" type="Data">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-285</displayx>
+    <displayy>-60</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="823a2df0-aca4-4ade-8089-aa09f91bdf78" name="Open workbook" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-45</displayx>
+    <displayy>-90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the required workbook should be opened. The default of zero indicates the currently active instance." expr="[Output file handle]" />
+      <input type="text" name="File name" narrative="The path and name of the file which should be opened." expr="&quot;C:\Users\ACT\Desktop\Output Marks Obtained.xlsx&quot;" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Workbook Name" narrative="The name used by Excel to identify the workbook - usually this is the file name (without the path)." stage="Output Workbook Name" />
+    </outputs>
+    <onsuccess>a1f58e6b-47f8-487e-95bf-e8e415f978ea</onsuccess>
+    <resource object="MS Excel VBO" action="Open Workbook" />
+  </stage>
+  <stage stageid="07feedc7-ccad-42d8-ab0c-7b906bb1bf1e" name="Input Workbook Name" type="Data">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-210</displayx>
+    <displayy>0</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="21f6bb5e-e71a-4ee2-8502-7a12d3b76b93" name="Output Workbook Name" type="Data">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-210</displayx>
+    <displayy>-60</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="5e6fff69-0a4a-4fac-ace4-280ba086f753" name="input file instance" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-45</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="flag" name="Enable Events" narrative="Flag to indicate that events should be enabled / disabled on the attached instance - defaulted to True" expr="" />
+    </inputs>
+    <outputs>
+      <output type="number" name="handle" narrative="An integer which can be used to identify the created instance in subsequent actions" stage="Input file instance" />
+    </outputs>
+    <onsuccess>eef11ae2-ebbf-459f-88ae-da10d1b25ea5</onsuccess>
+    <resource object="MS Excel VBO" action="Create Instance" />
+  </stage>
+  <stage stageid="1e09d5eb-846c-451c-afe7-3c0fa21df35c" name="Input file instance" type="Data">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-285</displayx>
+    <displayy>0</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="eef11ae2-ebbf-459f-88ae-da10d1b25ea5" name="Open Input workbook" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>30</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the required workbook should be opened. The default of zero indicates the currently active instance." expr="[Input file instance]" />
+      <input type="text" name="File name" narrative="The path and name of the file which should be opened." expr="[Files.Path]" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Workbook Name" narrative="The name used by Excel to identify the workbook - usually this is the file name (without the path)." stage="Input Workbook Name" />
+    </outputs>
+    <onsuccess>71c21318-835a-43f7-8ab7-9577353068eb</onsuccess>
+    <resource object="MS Excel VBO" action="Open Workbook" />
+  </stage>
+  <stage stageid="833414c1-59ab-4395-a0c1-a7c57d05b16f" name="Go to input worksheet" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>180</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="Cell Reference" expr="&quot;A1&quot;" />
+      <input type="number" name="Handle" expr="[Input file instance]" />
+      <input type="text" name="Workbook" expr="[Input Workbook Name]" />
+      <input type="text" name="Worksheet" expr="&quot;Sheet1&quot;" />
+    </inputs>
+    <onsuccess>143ff7cf-b48c-4d41-8281-159c8de4e143</onsuccess>
+    <resource object="MS Excel VBO" action="Select" />
+  </stage>
+  <stage stageid="716491c2-0120-4dd5-83e3-fbc499b2b3a7" name="Name" type="Data">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-210</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="a1f58e6b-47f8-487e-95bf-e8e415f978ea" name="show output sheet" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-45</displayx>
+    <displayy>-45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance which should have its window displayed. The default of zero indicates the currently active instance." expr="[Output file handle]" />
+    </inputs>
+    <onsuccess>18d49dbc-1204-412d-978c-74c8a09b108c</onsuccess>
+    <resource object="MS Excel VBO" action="Show" />
+  </stage>
+  <stage stageid="71c21318-835a-43f7-8ab7-9577353068eb" name="show input sheet" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>105</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance which should have its window displayed. The default of zero indicates the currently active instance." expr="[Input file instance]" />
+    </inputs>
+    <onsuccess>833414c1-59ab-4395-a0c1-a7c57d05b16f</onsuccess>
+    <resource object="MS Excel VBO" action="Show" />
+  </stage>
+  <stage stageid="143ff7cf-b48c-4d41-8281-159c8de4e143" name="Get Name value" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>255</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance from which the required cell value should be retrieved. The default of zero indicates the currently active instance." expr="[Input file instance]" />
+      <input type="text" name="Cell Reference" narrative="The cell reference indicating which cell's value should be retrieved. An empty value indicates that the currently active cell's value should be retrieved." expr="&quot;A2&quot;" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Value" narrative="The (unformatted) value from the required cell." stage="Name" />
+    </outputs>
+    <onsuccess>55c99fbe-6047-4eaf-823f-6e0a500469cf</onsuccess>
+    <resource object="MS Excel VBO" action="Get Cell Value" />
+  </stage>
+  <stage stageid="8872ddb5-a861-4d45-967a-fdb3412466e7" name="Marks" type="Data">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-285</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="c1be930a-4020-4d6c-9ab0-47ef7425f576" name="Counter" type="Data">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-255</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue>1</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="55c99fbe-6047-4eaf-823f-6e0a500469cf" name="Get Marks value" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>255</displayx>
+    <displayy>105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance from which the required cell value should be retrieved. The default of zero indicates the currently active instance." expr="[Input file instance]" />
+      <input type="text" name="Cell Reference" narrative="The cell reference indicating which cell's value should be retrieved. An empty value indicates that the currently active cell's value should be retrieved." expr="&quot;C2&quot;" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Value" narrative="The (unformatted) value from the required cell." stage="Marks" />
+    </outputs>
+    <onsuccess>fc700057-5e8f-4b58-b7ab-32c362e9309f</onsuccess>
+    <resource object="MS Excel VBO" action="Get Cell Value" />
+  </stage>
+  <stage stageid="fc700057-5e8f-4b58-b7ab-32c362e9309f" name="Write Name in Output" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>180</displayx>
+    <displayy>105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the required cell value should be set. The default of zero indicates the currently active instance." expr="[Output file handle]" />
+      <input type="text" name="Cell Reference" narrative="The reference on the speficied sheet identifying the cell which should be set." expr="&quot;A&quot;&amp;[Counter]+1" />
+      <input type="text" name="Value" narrative="The value to which the specified cell should be set." expr="[Name]" />
+    </inputs>
+    <onsuccess>7ae1cdf8-7386-4cd6-b472-ea06c3f00373</onsuccess>
+    <resource object="MS Excel VBO" action="Set Cell Value" />
+  </stage>
+  <stage stageid="7ae1cdf8-7386-4cd6-b472-ea06c3f00373" name="Write Marks in Output" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>105</displayx>
+    <displayy>105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the required cell value should be set. The default of zero indicates the currently active instance." expr="[Output file handle]" />
+      <input type="text" name="Cell Reference" narrative="The reference on the speficied sheet identifying the cell which should be set." expr="&quot;B&quot;&amp;[Counter]+1" />
+      <input type="text" name="Value" narrative="The value to which the specified cell should be set." expr="[Marks]" />
+    </inputs>
+    <onsuccess>d0787a40-1d2b-4b42-884b-53a48942d551</onsuccess>
+    <resource object="MS Excel VBO" action="Set Cell Value" />
+  </stage>
+  <stage stageid="d0787a40-1d2b-4b42-884b-53a48942d551" name="Close Input file" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>30</displayx>
+    <displayy>105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the workbook which should be closed resides. The default of zero indicates the currently active instance." expr="[Input file instance]" />
+      <input type="text" name="Workbook Name" narrative="The name of the workbook which should be closed." expr="[Input Workbook Name]" />
+      <input type="flag" name="Save Data" narrative="True to save the data before closing the workbook; The default of False will discard any changes before closing the workbook." expr="" />
+    </inputs>
+    <onsuccess>cde48b0c-1441-4961-aac9-f96e7efb0827</onsuccess>
+    <resource object="MS Excel VBO" action="Close Workbook" />
+  </stage>
+  <stage stageid="cde48b0c-1441-4961-aac9-f96e7efb0827" name="Increment in Counter" type="Calculation">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-45</displayx>
+    <displayy>105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>92087624-8a6c-4372-a752-b378ef7d70c8</onsuccess>
+    <calculation expression="[Counter]+1" stage="Counter" />
+  </stage>
+  <stage stageid="d7f0ca57-f738-44b9-8909-eac65803db87" name="Close Output file" type="Action">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>45</displayx>
+    <displayy>165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="number" name="handle" narrative="The integer handle identifying the instance on which the workbook which should be closed resides. The default of zero indicates the currently active instance." expr="[Output file handle]" />
+      <input type="text" name="Workbook Name" narrative="The name of the workbook which should be closed." expr="[Output Workbook Name]" />
+      <input type="flag" name="Save Data" narrative="True to save the data before closing the workbook; The default of False will discard any changes before closing the workbook." expr="" />
+    </inputs>
+    <onsuccess>58eea22a-5e75-4ad3-99e8-63d3a3d72c37</onsuccess>
+    <resource object="MS Excel VBO" action="Close Workbook" />
+  </stage>
+  <stage stageid="18d49dbc-1204-412d-978c-74c8a09b108c" name="Loop Start2" type="LoopStart">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-45</displayx>
+    <displayy>0</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>5e6fff69-0a4a-4fac-ace4-280ba086f753</onsuccess>
+    <groupid>2434686c-c83b-4c84-873e-6eaf361ab536</groupid>
+    <looptype>ForEach</looptype>
+    <loopdata>Files</loopdata>
+  </stage>
+  <stage stageid="92087624-8a6c-4372-a752-b378ef7d70c8" name="Loop End2" type="LoopEnd">
+    <subsheetid>f85ee371-feee-4dd0-b44c-ddcb340878f7</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-45</displayx>
+    <displayy>165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>d7f0ca57-f738-44b9-8909-eac65803db87</onsuccess>
+    <groupid>2434686c-c83b-4c84-873e-6eaf361ab536</groupid>
+  </stage>
+</process>
